@@ -1,25 +1,79 @@
-import logo from './logo.svg';
-import './App.css';
+import "./index.css";
+import "./App.css";
+import React, { useState } from "react";
+import Tareas from "tareas";
 
-function App() {
+const App = () => {
+  const [valorInput, setValorInput] = useState("");
+  const [lista, setNuevoArray] = useState([
+    "Limpiar",
+    "Hacer compras",
+    "Ir al gimnasio 3 veces",
+    "Lavar ropa",
+  ]);
+
+  // const [valorEdad, setValorEdad] = useState(0)
+
+  const handleChange = (e) => {
+    setValorInput(e.target.value);
+  };
+
+  // const handleChangeEdad = (e) => {
+  //     setValorEdad(e.target.value)
+  //     console.log(e.target.value)
+  // }
+
+  const handleClick = () => {
+    if (valorInput !== "") {
+      setNuevoArray([...lista, valorInput]);
+      setValorInput("");
+    }
+    return;
+  };
+
+
+  const borrarTarea = (param) => {
+  let nuevalista = (lista.filter(tareas => tareas !== param))
+  console.log("PROBANDO BOTON ELIMINAR")
+  setNuevoArray(nuevalista)
+  };
+
+  const ModificarTarea = (i) => {
+    console.log("hola modificar", i)
+    };
+    
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+      <h2>LISTA DE TAREAS</h2>
+      <div className="contenedor">
+        <div>
+          <ul>
+            {lista.map((tareas, i) => {
+              return <Tareas tareas={tareas} key={i}  index={i} borrarTarea={borrarTarea} ModificarTarea={ModificarTarea}/>;
+            })}
+          </ul>
+        </div>
 
+        <div className="agregar-contenedor">
+          <input
+            onChange={handleChange}
+            type="text"
+            placeholder="nueva tarea"
+          ></input>
+          <button onClick={handleClick} className="agregar">
+            +
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
 export default App;
+
+//     <div className="contenedor">
+//     <input value={valorInput} onChange={handleChange} type="text" placeholder="escribi tu nombre"></input>
+//     <input value={valorEdad} onChange={handleChangeEdad} type="number" placeholder="escribi tu edad"></input>
+// <button onClick={handleClick}>ENVIAR FORMULARIO</button>
+//     </div>
