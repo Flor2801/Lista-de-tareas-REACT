@@ -12,16 +12,9 @@ const App = () => {
     "Lavar ropa",
   ]);
 
-  // const [valorEdad, setValorEdad] = useState(0)
-
   const handleChange = (e) => {
     setValorInput(e.target.value);
   };
-
-  // const handleChangeEdad = (e) => {
-  //     setValorEdad(e.target.value)
-  //     console.log(e.target.value)
-  // }
 
   const handleClick = () => {
     if (valorInput !== "") {
@@ -31,18 +24,15 @@ const App = () => {
     return;
   };
 
-
   const borrarTarea = (param) => {
-  let nuevalista = (lista.filter(tareas => tareas !== param))
-  console.log("PROBANDO BOTON ELIMINAR")
-  setNuevoArray(nuevalista)
+    let nuevalista = lista.filter((tareas) => tareas !== param);
+    console.log("PROBANDO BOTON ELIMINAR");
+    setNuevoArray(nuevalista);
   };
 
   const ModificarTarea = (i) => {
-    console.log("hola modificar", i)
-    };
-    
-  
+    console.log("hola modificar", i);
+  };
 
   return (
     <>
@@ -51,7 +41,15 @@ const App = () => {
         <div>
           <ul>
             {lista.map((tareas, i) => {
-              return <Tareas tareas={tareas} key={i}  index={i} borrarTarea={borrarTarea} ModificarTarea={ModificarTarea}/>;
+              return (
+                <Tareas
+                  tareas={tareas}
+                  key={i}
+                  index={i}
+                  borrarTarea={borrarTarea}
+                  ModificarTarea={ModificarTarea}
+                />
+              );
             })}
           </ul>
         </div>
